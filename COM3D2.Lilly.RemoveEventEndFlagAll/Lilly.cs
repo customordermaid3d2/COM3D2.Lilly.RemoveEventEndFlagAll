@@ -18,20 +18,27 @@ namespace COM3D2.Lilly.RemoveFlag
         public Lilly()
         {
             cheatUtill = new CheatUtill();
+
+            actions += cheatUtill.OnGui;
         }
 
         public void Awake()
         {
 
         }
+
+        public static event Action actions;
+        public static Harmony harmonyMaid;
+
         public void OnEnable()
         {
             MyLog.LogMessage("OnEnable");
 
             SceneManager.sceneLoaded += this.OnSceneLoaded;
 
+
             //HarmonyUtill.SetHarmonyPatchAll();
-            Harmony.CreateAndPatchAll(typeof(MaidManagementMainPatch));
+            harmonyMaid=Harmony.CreateAndPatchAll(typeof(MaidManagementMainPatch));
         }
 
         public static Scene scene;
@@ -51,5 +58,20 @@ namespace COM3D2.Lilly.RemoveFlag
                 );
             GearMenu.SetButton();
         }
+
+        public void OnGUI()
+        {
+            actions();
+        }
+
+        public void OnDisable()
+        {
+            MyLog.LogMessage("OnDisable");
+
+            SceneManager.sceneLoaded -= this.OnSceneLoaded;
+
+            harmonyMaid.UnpatchSelf();
+        }
+
     }
 }
