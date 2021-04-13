@@ -1,7 +1,8 @@
 # 필요한거  
 
 - COM3D2.API.dll  
-https://github.com/JustAGuest4168/COM3D2.OutfitMatchHelper/releases  
+https://github.com/DeathWeasel1337/COM3D2_Plugins  
+
 
 # 넣는곳  
 
